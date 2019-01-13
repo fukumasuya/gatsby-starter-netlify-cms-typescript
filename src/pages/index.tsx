@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
 
-type Props = {
+interface Props {
   data: {
     allMarkdownRemark: {
       edges: any[]
