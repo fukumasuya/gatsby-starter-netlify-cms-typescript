@@ -1,11 +1,42 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import Features from '../components/Features'
 import Testimonials from '../components/Testimonials'
 import Pricing from '../components/Pricing'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
+
+interface ProductPageTemplateProps {
+  image?: any;
+  title?: string;
+  heading?: string;
+  description?: string;
+  intro: {
+    blurbs: any[]
+  };
+  main: {
+    heading?: string;
+    description?: string;
+    image1?: any;
+    image2?: any;
+    image3?: any;
+  };
+  testimonials: any[];
+  fullImage?: any;
+  pricing: {
+    heading?: string;
+    description?: string;
+    plans: any[];
+  }
+}
+
+interface ProductPageProps {
+  data: {
+    markdownRemark: {
+      frontmatter: any;
+    }
+  }
+}
 
 export const ProductPageTemplate = ({
   image,
@@ -17,7 +48,7 @@ export const ProductPageTemplate = ({
   testimonials,
   fullImage,
   pricing,
-}) => (
+}: ProductPageTemplateProps) => (
   <section className="section section--gradient">
     <div className="container">
       <div className="section">
@@ -108,31 +139,7 @@ export const ProductPageTemplate = ({
   </section>
 )
 
-ProductPageTemplate.propTypes = {
-  image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  title: PropTypes.string,
-  heading: PropTypes.string,
-  description: PropTypes.string,
-  intro: PropTypes.shape({
-    blurbs: PropTypes.array,
-  }),
-  main: PropTypes.shape({
-    heading: PropTypes.string,
-    description: PropTypes.string,
-    image1: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    image2: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    image3: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  }),
-  testimonials: PropTypes.array,
-  fullImage: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  pricing: PropTypes.shape({
-    heading: PropTypes.string,
-    description: PropTypes.string,
-    plans: PropTypes.array,
-  }),
-}
-
-const ProductPage = ({ data }) => {
+const ProductPage = ({ data }: ProductPageProps) => {
   const { frontmatter } = data.markdownRemark
 
   return (
@@ -150,14 +157,6 @@ const ProductPage = ({ data }) => {
       />
     </Layout>
   )
-}
-
-ProductPage.propTypes = {
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.shape({
-      frontmatter: PropTypes.object,
-    }),
-  }),
 }
 
 export default ProductPage

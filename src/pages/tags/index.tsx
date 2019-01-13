@@ -1,12 +1,25 @@
-import React from 'react'
+import * as React from 'react'
 import { kebabCase } from 'lodash'
 import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import Layout from '../../components/Layout'
 
+interface Props {
+  data: {
+    allMarkdownRemark: {
+      group: any[];
+    };
+    site: {
+      siteMetadata: {
+        title: string;
+      }
+    }
+  };
+}
+
 const TagsPage = ({
   data: { allMarkdownRemark: { group }, site: { siteMetadata: { title } } },
-}) => (
+}: Props) => (
   <Layout>
     <section className="section">
       <Helmet title={`Tags | ${title}`} />

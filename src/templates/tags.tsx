@@ -1,9 +1,26 @@
-import React from 'react'
+import * as React from 'react'
 import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
 
-class TagRoute extends React.Component {
+interface Props {
+  data: {
+    allMarkdownRemark: {
+      edges: any[]
+      totalCount?: number;
+    }
+    site: {
+      siteMetadata: {
+        title?: string;
+      }
+    }
+  };
+  pageContext: {
+    tag?: string;
+  }
+}
+
+class TagRoute extends React.Component<Props> {
   render() {
     const posts = this.props.data.allMarkdownRemark.edges
     const postLinks = posts.map(post => (
